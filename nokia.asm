@@ -29,6 +29,7 @@ STE2007_DISPLAYON:				.equ	0xAF
 	.global initNokia
 	.global clearDisplay
 	.global drawBlock
+	.global drawBall
 
 
 ;-------------------------------------------------------------------------------
@@ -373,6 +374,53 @@ loopdB:
 	jnz		loopdB
 
 	pop		R14
+	pop		R13
+	pop		R12
+	pop		R5
+
+	ret							; return whence you came
+
+	;-------------------------------------------------------------------------------
+;	Name:		drawBall
+;	Inputs:		R12 row to draw ball
+;				R13	column to draw ball
+;
+;	Outputs:	none
+;	Purpose:	draw an 7 x 7 ball of black pixels at screeen cordinates.
+;
+;
+;	Registers:	R5	column counter to draw all 8 pixel columns
+;-------------------------------------------------------------------------------
+drawBall:
+	push	R5
+	push	R12
+	push	R13
+
+	rla.w	R13
+	rla.w	R13
+	rla.w	R13
+	call	#setAddress			; move cursor to upper left corner of block
+
+	mov		#1, R12
+	mov		#0x38, R13
+	call	#writeNokiaByte		; write the left side of the ball
+	mov		#0x7C, R13
+	call	#writeNokiaByte
+	mov.w	#0x03, R5			; loop all 3 middle pixel columns
+
+	mov		#0xFE, R13
+	jmp		loopdBall
+
+loopdBall:
+	call	#writeNokiaByte		; draw the pixels
+	dec.w	R5
+	jnz		loopdBall
+
+	mov		#0x7C, R13			; write the right side of the ball
+	call	#writeNokiaByte
+	mov		#0x38, R13
+	call	#writeNokiaByte
+
 	pop		R13
 	pop		R12
 	pop		R5

@@ -110,6 +110,17 @@ char hitRight(ball_t ball){
 	}
 }
 
+char hitBall(ball_t hitter, ball_t hit){
+	if(((hit.position.x) == (hitter.position.x)) &&
+			((hit.position.y) == (hitter.position.y))){
+		return 1;
+	}
+
+	else{
+		return 0;
+	}
+}
+
 //--------------------------------------------------------------------------------
 // Author:   C2C Bodin
 // Function: Sleep

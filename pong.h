@@ -35,6 +35,8 @@ char hitLeft(ball_t ball);
 
 char hitRight(ball_t ball);
 
+char hitBall(ball_t hitter, ball_t hit);
+
 void Sleep(int ms);
 
 int getX(ball_t ball);
