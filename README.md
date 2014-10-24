@@ -194,7 +194,7 @@ and not in assembly where that label is global.
 	
 ### Main
 	
-	#### Initilizing variables
+#### Initilizing variables
 	
 ```
 	void main() {
