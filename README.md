@@ -128,15 +128,15 @@ loopdB:
 	pop		R5
 
 	ret							; return whence you came
-	```
+```
 	
-	The majority of this code was provided. I added R14 which serves as a toggle for the block color taking values
-	of either 1 for clear and 0 for black. I implemented this fucntionality with a simple	tst.b  and jnz.
-	I selectively loaded R13 with either 0xFF (filled) or 0x00 (unfilled). 
+The majority of this code was provided. I added R14 which serves as a toggle for the block color taking values
+of either 1 for clear and 0 for black. I implemented this fucntionality with a simple	tst.b  and jnz.
+I selectively loaded R13 with either 0xFF (filled) or 0x00 (unfilled). 
 	
-	### drawBall
+### drawBall
 	
-	```
+```
 	;-------------------------------------------------------------------------------
 ;	Name:		drawBall
 ;	Inputs:		R12 row to draw ball
@@ -183,20 +183,20 @@ loopdBall:
 	pop		R5
 
 	ret							; return whence you came
-	```
+```
 	
-	Again, a lot of the code for my drawBall was borrowed from drawBlock. I dropped the R14 from this function because
-	I didn't need to paint with it at this point. I painted the best ball I could in MS paint that fit in an 8x8 square. 
-	I translated each into their corresponding NokiaByte values and implemented it in the subroutine. As it turned out I
-	needed three 0xFF bars and so I repurposed loopdB to loopdBall which does the same thing, but only three times. I had
-	to rename it to to loopdBall because of a compiler error. I was thinking in C where items can be local to functions
-	and not in assembly where that label is global. 
+Again, a lot of the code for my drawBall was borrowed from drawBlock. I dropped the R14 from this function because
+I didn't need to paint with it at this point. I painted the best ball I could in MS paint that fit in an 8x8 square. 
+I translated each into their corresponding NokiaByte values and implemented it in the subroutine. As it turned out I
+needed three 0xFF bars and so I repurposed loopdB to loopdBall which does the same thing, but only three times. I had
+to rename it to to loopdBall because of a compiler error. I was thinking in C where items can be local to functions
+and not in assembly where that label is global. 
 	
-	### Main
+### Main
 	
 	#### Initilizing variables
 	
-	```
+```
 	void main() {
 
 	int	ballColumn, ballRow, paddleColumn, paddleRow;
@@ -218,11 +218,11 @@ loopdBall:
 	clearDisplay();
 	drawBall(ballRow,ballColumn);
 	
-	```
+```
 	
-	#### Poll the buttons and alter the values of the paddle accordingly
+#### Poll the buttons and alter the values of the paddle accordingly
 	
-	```
+```
 		while(1) {
 
 			if (ballColumn == 0){ //Hit the left side
@@ -311,7 +311,7 @@ looked like. Using this build, run, examine, fix process I was able to achieve f
 
 Here is a link to my final, working code. [Here](https://www.youtube.com/watch?v=YqVPotpI3HE&list=UUnEfYJYsfE9CVYEwZqF67PQ)
 
-## Conclustion
+## Conclusion
 
 I feel very much more comfortable with writing subroutines in assembly, importing them into a c file, and utilizing them.
 In the case of the nokia display, the assembly side of things was more precise and could do a lot that could not be done
